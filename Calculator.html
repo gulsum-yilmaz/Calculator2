@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Calculator</title>
+	<script type="text/javascript" src="C:\Users\User\Desktop\jquery-1.6.2.min.js"></script>
+    <style>
+        .size{
+            width:50px;
+            height:50px;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="calculator" style="margin-left:40%; margin-top:5%;">
+        <input type="field" name="result" class="result" value="">
+        <br><br />
+        <input type="button" name="1" value="1" onClick="WriteNumber(1)">
+        <input type="button" name="2" value="2" onClick="WriteNumber(2)">
+        <input type="button" name="3" value="3" onClick="WriteNumber(3)">
+        <input type="button" name="+" value="+" onClick="calculate('+')">
+        <br>
+        <input type="button" name="4" value="4" onclick="WriteNumber(4)" >
+        <input type="button" name="5" value="5" onClick="WriteNumber(5)">
+        <input type="button" name="6" value="6" onClick="WriteNumber(6)">
+        <input type="button" name="-" value="-" onClick="calculate('-')">
+        <br>
+        <input type="button" name="7" value="7" onclick="WriteNumber(7)">
+        <input type="button" name="8" value="8" onclick="WriteNumber(8)">
+        <input type="button" name="9" value="9" onclick="WriteNumber(9)">
+        <input type="button" name="*" value="*" onClick="calculate('*')">
+        <br>
+        <input type="button" name="0" value="0" onClick="WriteNumber(0)">
+        <input type="button" name="C" value="C" onClick="clean()">
+        <input type="button" name="=" value="=" onClick="calculate('=')">
+        <input type="button" name="/" value="/" onClick="calculate('/')">
+        <br>
+    </form>
+</body>
+</html>
+
+
+<script language="javascript">
+
+    $("input").addClass("size");   //Input'lara boyut ver.
+
+    var AddNumber = false;
+
+    var StartingNumber = 0;
+
+    var operation = "=";
+
+
+    //Field'ı temizle
+    function clean() {
+        $(".result").val("");
+
+        StartingNumber = 0;
+
+        AddNumber = false;
+
+        operation = "=";
+    }
+
+    //Hesaplama yap
+function calculate(NewOperation) {
+
+    var NewNumber = eval($(".result").val());
+
+    var result = $(".result").val();
+
+    if (operation == "+") {
+        StartingNumber = StartingNumber + NewNumber
+    }
+    else if (operation == "-") {
+        StartingNumber = StartingNumber - NewNumber
+    }
+    else if (operation == "/") {
+        StartingNumber = StartingNumber / NewNumber
+    }
+    else if (operation == "*") {
+        StartingNumber = StartingNumber * NewNumber
+    }
+    else if (operation == "=") {
+        StartingNumber = NewNumber;
+    }
+    else {
+        StartingNumber = NewNumber;
+    }
+
+    result = StartingNumber;
+
+    $(".result").val(result);
+
+    AddNumber = false;
+
+    operation = NewOperation;
+}
+
+
+    //Yeni rakam girme işlemi
+function WriteNumber(number) {
+
+    if (AddNumber) {
+        var result = $(".result").val();
+
+        result += number;
+
+        $(".result").val(result);
+    }
+    else {
+        $(".result").val(number);
+
+        AddNumber = true
+    }
+}
+
+</script>
